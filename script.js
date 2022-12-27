@@ -23,7 +23,8 @@ function computerChoise() {
 }
 
 const compChoise = computerChoise()
-console.log(compChoise)
+// uncomment to debug compChoise
+// console.log(compChoise)
 
 //let player choose  "rock" "paper" "scissors" by typing the name of their choise
 
@@ -38,37 +39,66 @@ function playerInput() {
     return lowerInput;
 }
 let input = playerInput();
-console.log(input)
+//uncomment to debug playerInput
+// console.log(input)
 
-function checkValidInput(){
-if (input === null) {
-    console.log("Game cancelled, refresh page to play game!")
-}
-else if (input !== "r" && input !== "s" && input !== "p") {
+// check if player input is valid
 
-    console.log("Please enter a vilid value: R for rock, P for paper and S for Scissors")
-    input = playerInput();
-    if (input !== "r" && input !== "s" && input !== "p") {
-       
+function checkValidInput() {
+    if (input === null) {
         console.log("Game cancelled, refresh page to play game!")
-    } else {
-        console.log("The game is on!")
+        return 0
     }
+    else if (input !== "r" && input !== "s" && input !== "p") {
 
-}
-else {
-    console.log("The game is on!")
-}
+        console.log("Please enter a vilid value: R for rock, P for paper and S for Scissors")
+        input = playerInput();
+        if (input !== "r" && input !== "s" && input !== "p") {
+
+            console.log("Game cancelled, refresh page to play game!")
+            return 0
+        } else {
+           
+            return 1
+        }
+
+    }
+    else {
+       
+        return 1
+    }
 }
 
-checkValidInput();
-console.log(input)
+const validInput = (checkValidInput());
+// uncomment to debug playerInputs
+// console.log(validInput)
+// console.log(input)
+checkWinner();
+
 
 // check if player choise beats computer choises
 
+
 function checkWinner() {
+    if (validInput === 1) {
+        console.log("The game is on!")
+        // draw cases
+        if (compChoise === "s" && input === "s"
+            || compChoise === "p" && input === "p"
+            || compChoise === "r" && input === "r") {
+            return console.log("Its a draw!")
+            // comp win cases 
+        } else if (compChoise === "s" && input === "p"
+            || compChoise=== "p" && input === "r"
+            || compChoise === "r" && input === "s") {
+                return console.log("The computer wins!")
+            // player wins case
+        } else {
+            return console.log("You win!")
+        }
 
-
+    } else {
+        return console.log("No winner game cancelled")
+    }
 }
 
-// display a you win or you lost massage
