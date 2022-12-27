@@ -23,6 +23,7 @@ function computerChoise() {
 }
 
 const compChoise = computerChoise()
+
 // uncomment to debug compChoise
 // console.log(compChoise)
 
@@ -39,6 +40,7 @@ function playerInput() {
     return lowerInput;
 }
 let input = playerInput();
+
 //uncomment to debug playerInput
 // console.log(input)
 
@@ -58,21 +60,23 @@ function checkValidInput() {
             console.log("Game cancelled, refresh page to play game!")
             return 0
         } else {
-           
+
             return 1
         }
 
     }
     else {
-       
+
         return 1
     }
 }
 
 const validInput = (checkValidInput());
+
 // uncomment to debug playerInputs
 // console.log(validInput)
 // console.log(input)
+
 checkWinner();
 
 
@@ -89,9 +93,9 @@ function checkWinner() {
             return console.log("Its a draw!")
             // comp win cases 
         } else if (compChoise === "s" && input === "p"
-            || compChoise=== "p" && input === "r"
+            || compChoise === "p" && input === "r"
             || compChoise === "r" && input === "s") {
-                return console.log("The computer wins!")
+            return console.log("The computer wins!")
             // player wins case
         } else {
             return console.log("You win!")
@@ -102,3 +106,25 @@ function checkWinner() {
     }
 }
 
+// convet letter choises to words and display player choise and compChoise
+
+let playerWord =""
+let compWord = ""
+
+function convertToWord(letter) {
+    if (letter === "p") {
+        return "Paper"
+    } else if (letter === "r") {
+        return "Rock"
+    } else {
+        return "Scissors"
+    }
+}
+
+playerWord = convertToWord(input);
+compWord = convertToWord(compChoise);
+
+if (validInput === 1) {
+console.log(`Player chose ${playerWord}!`)
+console.log(`Computer chose ${compWord}!`)
+}
