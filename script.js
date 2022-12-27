@@ -9,22 +9,66 @@ function getRandomInt(max) {
 function computerChoise() {
     let compChoise = getRandomInt(3);
     let choise = ""
-    
-    if (compChoise === 1){
-        choise = "Rock";
-    } else if (compChoise === 2){
-        choise = "Paper"
+
+    if (compChoise === 1) {
+        choise = "r";
+    } else if (compChoise === 2) {
+        choise = "p"
     } else {
-        choise = "Scissors"
+        choise = "s"
     }
 
-    console.log(choise)
+
+    return choise
 }
 
-computerChoise()
+const compChoise = computerChoise()
+console.log(compChoise)
+
 //let player choose  "rock" "paper" "scissors" by typing the name of their choise
 
+function playerInput() {
+    const input = prompt("Sellect R for rock, P for paper and S for Scissors")
+    if (input === null || input === "") {
 
-// check if player choise beats computer choise
+        return null;
+    }
+    const lowerInput = input.toLowerCase()
+
+    return lowerInput;
+}
+let input = playerInput();
+console.log(input)
+
+function checkValidInput(){
+if (input === null) {
+    console.log("Game cancelled, refresh page to play game!")
+}
+else if (input !== "r" && input !== "s" && input !== "p") {
+
+    console.log("Please enter a vilid value: R for rock, P for paper and S for Scissors")
+    input = playerInput();
+    if (input !== "r" && input !== "s" && input !== "p") {
+       
+        console.log("Game cancelled, refresh page to play game!")
+    } else {
+        console.log("The game is on!")
+    }
+
+}
+else {
+    console.log("The game is on!")
+}
+}
+
+checkValidInput();
+console.log(input)
+
+// check if player choise beats computer choises
+
+function checkWinner() {
+
+
+}
 
 // display a you win or you lost massage
