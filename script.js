@@ -1,130 +1,89 @@
-// set computer choise function by returning a 
-//random number between 1-3 and convert to "rock" "paper" "scissors"
-
+//a function that plays a single round of rock paper scissors
 function getRandomInt(max) {
     return Math.floor(Math.random() * max + 1);
 }
 
-
-function computerChoise() {
+//generate random number 1-3 and assign rock paper scissors 
+function getComputerChoise() {
     let compChoise = getRandomInt(3);
     let choise = ""
 
     if (compChoise === 1) {
         choise = "r";
+        return choise
     } else if (compChoise === 2) {
         choise = "p"
+        return choise
     } else {
         choise = "s"
+        return choise
     }
 
 
-    return choise
 }
 
-const compChoise = computerChoise()
-
-// uncomment to debug compChoise
-// console.log(compChoise)
-
-//let player choose  "rock" "paper" "scissors" by typing the name of their choise
-
-function playerInput() {
-    const input = prompt("Sellect R for rock, P for paper and S for Scissors")
+function getPlayerInput() {
+    let input = prompt("select r=rock p=paper s=scissors")
     if (input === null || input === "") {
+        return input = null
+    } else {
 
-        return null;
+        return input.toLocaleLowerCase();
     }
-    const lowerInput = input.toLowerCase()
-
-    return lowerInput;
 }
-let input = playerInput();
 
-//uncomment to debug playerInput
-// console.log(input)
+let compScore = 0
+let playerScore = 0
 
-// check if player input is valid
-
-function checkValidInput() {
-    if (input === null) {
-        console.log("Game cancelled, refresh page to play game!")
-        return 0
+function playRound(playerInput, compSelect) {
+    // draw cases
+    if (compSelect === "s" && playerInput === "s"
+        || compSelect === "p" && playerInput === "p"
+        || compSelect === "r" && playerInput === "r") {
+        return console.log("Its a draw!")
+        // comp win cases 
+    } else if (compSelect === "s" && playerInput === "p"
+        || compSelect === "p" && playerInput === "r"
+        || compSelect === "r" && playerInput === "s") {
+        console.log("The computer wins the round!")
+        return compScore += 1
+        // player wins caser
+    } else {
+        console.log("You win the round!")
+        return playerScore += 1
     }
-    else if (input !== "r" && input !== "s" && input !== "p") {
 
-        console.log("Please enter a vilid value: R for rock, P for paper and S for Scissors")
-        input = playerInput();
-        if (input !== "r" && input !== "s" && input !== "p") {
 
-            console.log("Game cancelled, refresh page to play game!")
-            return 0
-        } else {
+}
 
-            return 1
+function game() {
+    for (let i = 1; i < 50; i++) {
+        if (compScore >= 5) {
+            console.log(`Computer wins at round ${i} with a score of ${compScore} to ${playerScore}!`)
+            return
+        } else if (playerScore >= 5) {
+            console.log(`Player wrins at round ${i} with a score of ${playerScore} to ${compScore}!`)
+            return
         }
 
-    }
-    else {
+        console.log(`this is round ${i}`)
 
-        return 1
-    }
-}
+        const compSelect = getComputerChoise();
+        console.log(`computer selection is ${compSelect}`);
 
-const validInput = (checkValidInput());
+        const playerInput = getPlayerInput()
+        console.log(`player selection is ${playerInput}`);
 
-// uncomment to debug playerInputs
-// console.log(validInput)
-// console.log(input)
-
-checkWinner();
-
-
-// check if player choise beats computer choises
-
-
-function checkWinner() {
-    if (validInput === 1) {
-        console.log("The game is on!")
-        // draw cases
-        if (compChoise === "s" && input === "s"
-            || compChoise === "p" && input === "p"
-            || compChoise === "r" && input === "r") {
-            return console.log("Its a draw!")
-            // comp win cases 
-        } else if (compChoise === "s" && input === "p"
-            || compChoise === "p" && input === "r"
-            || compChoise === "r" && input === "s") {
-            return console.log("The computer wins!")
-            // player wins case
-        } else {
-            return console.log("You win!")
+        //end loop if player enters null or empty srtring
+        if (playerInput === null || playerInput === "") {
+            console.log(`Player gave up at round ${i} with a score of ${playerScore} to ${compScore}!`)
+            return
         }
 
-    } else {
-        return console.log("No winner game cancelled")
+        playRound(playerInput, compSelect);
+        console.log(`Computer srote is ${compScore}`)
+        console.log(`Player score is ${playerScore}`)
     }
 }
 
-// convet letter choises to words and display player choise and compChoise
-
-let playerWord =""
-let compWord = ""
-
-function convertToWord(letter) {
-    if (letter === "p") {
-        return "Paper"
-    } else if (letter === "r") {
-        return "Rock"
-    } else {
-        return "Scissors"
-    }
-}
-
-playerWord = convertToWord(input);
-compWord = convertToWord(compChoise);
-
-if (validInput === 1) {
-console.log(`Player chose ${playerWord}!`)
-console.log(`Computer chose ${compWord}!`)
-}
+game();
