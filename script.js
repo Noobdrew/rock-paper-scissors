@@ -40,24 +40,37 @@ function playRound(playerInput, compSelect) {
     if (compSelect === "s" && playerInput === "s"
         || compSelect === "p" && playerInput === "p"
         || compSelect === "r" && playerInput === "r") {
-        return console.log("Its a draw!")
+        return console.warn("Its a draw!")
         // comp win cases 
     } else if (compSelect === "s" && playerInput === "p"
         || compSelect === "p" && playerInput === "r"
         || compSelect === "r" && playerInput === "s") {
-        console.log("The computer wins the round!")
+        console.warn("The computer wins the round!")
         return compScore += 1
         // player wins caser
     } else {
-        console.log("You win the round!")
+        console.warn("You win the round!")
         return playerScore += 1
     }
 
 
 }
+let compWord = ""
+let playerWord = ""
+function convertToWord(letter) {
+    if (letter === "p") {
+        return "Paper"
+    } else if (letter === "r") {
+        return "Rock"
+    } else {
+        return "Scissors"
+    }
+}
 
 function game() {
+    console.log("First to 5 wins!")
     for (let i = 1; i < 50; i++) {
+        
         if (compScore >= 5) {
             console.log(`Computer wins at round ${i} with a score of ${compScore} to ${playerScore}!`)
             return
@@ -66,13 +79,14 @@ function game() {
             return
         }
 
-        console.log(`this is round ${i}`)
+        console.log(`This is round ${i}!`)
 
         const compSelect = getComputerChoise();
-        console.log(`computer selection is ${compSelect}`);
+        //console.log(`computer selection is ${compSelect}`);
 
         const playerInput = getPlayerInput()
-        console.log(`player selection is ${playerInput}`);
+        console.clear();
+        //console.log(`player selection is ${playerInput}`);
 
         //end loop if player enters null or empty srtring
         if (playerInput === null || playerInput === "") {
@@ -81,8 +95,16 @@ function game() {
         }
 
         playRound(playerInput, compSelect);
-        console.log(`Computer srote is ${compScore}`)
-        console.log(`Player score is ${playerScore}`)
+       
+        //convert letters to words
+        playerWord = convertToWord(playerInput)
+        compWord=convertToWord(compSelect)
+        console.log(`Player chose ${playerWord}`)
+        console.log(`Computer chose ${compWord}`)
+
+        console.log(`The current score is ${compScore} for the computer, and ${playerScore} for the player!`)
+        
+        
     }
 }
 
