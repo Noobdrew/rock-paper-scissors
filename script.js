@@ -47,7 +47,7 @@ function playRound(playerInput, compSelect) {
         || compSelect === "r" && playerInput === "s") {
         console.warn("The computer wins the round!")
         return compScore += 1
-        // player wins caser
+        // player wins cases
     } else {
         console.warn("You win the round!")
         return playerScore += 1
@@ -108,4 +108,4 @@ function game() {
     }
 }
 
-game();
+//game();
