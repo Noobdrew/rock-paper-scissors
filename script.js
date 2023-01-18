@@ -8,14 +8,19 @@ let compRock = document.querySelector('.rockComp')
 let compPaper = document.querySelector('.paperComp')
 let compScis = document.querySelector('.scissorsComp')
 let text = document.querySelector('.text')
-
+let popupText = document.querySelector('.popup h4')
 let container = document.querySelector('.container')
-
-
+let popupButton = document.querySelector('.popButton')
+let popup = document.querySelector('.popup')
+//all event listeners 
 buttonRock.addEventListener('click', rockClick)
 buttonPaper.addEventListener('click', paperClick)
 buttonScis.addEventListener('click', scisClick)
+popupButton.addEventListener('click', reloadGame)
 
+function reloadGame() {
+    location.reload()
+}
 
 //a function that plays a single round of rock paper scissors
 function getRandomInt(max) {
@@ -44,16 +49,6 @@ function getComputerChoise() {
     }
 
 
-}
-
-function getPlayerInput() {
-    let input = prompt("select r=rock p=paper s=scissors")
-    if (input === null || input === "") {
-        return input = null
-    } else {
-
-        return input.toLocaleLowerCase();
-    }
 }
 
 let compScore = 0
@@ -95,12 +90,9 @@ function playRound(playerInput, compSelect) {
         text.textContent = `You win the round! Player chose: ${playerWord} Computer chose: ${compWord}`
         return playerScore += 1
     }
-
-
 }
 
-//take player input from buttons
-
+//remove previous selection 
 function removeRed() {
     compRock.classList.remove('selected')
     compPaper.classList.remove('selected')
@@ -109,10 +101,34 @@ function removeRed() {
     buttonPaper.classList.remove('selected')
     buttonScis.classList.remove('selected')
 }
-
-
-
-
+//stop buttons after 5 games
+function stopGame() {
+    buttonRock.removeEventListener('click', rockClick)
+    buttonPaper.removeEventListener('click', paperClick)
+    buttonScis.removeEventListener('click', scisClick)
+}
+function game() {
+    console.log(playerScore)
+    scoreP.textContent = `Score: ${playerScore}`
+    console.log(compScore)
+    scoreC.textContent = `Score: ${compScore}`
+    if (playerScore >= 5) {
+        console.log('You win the game')
+        stopGame()
+        popupText.textContent = `You win with a score of ${playerScore} to ${compScore}`
+        container.style.webkitFilter = "blur(5px)"
+        popup.style.scale = '120'
+        popup.style.visibility = 'visible'
+    } else if (compScore >= 5) {
+        console.log('Computer wins')
+        stopGame()
+        popupText.textContent = `You lose with a score of ${playerScore} to ${compScore} `
+        container.style.webkitFilter = "blur(5px)"
+        popup.style.scale = '120'
+        popup.style.visibility = 'visible'
+    }
+}
+//function for rock button
 function rockClick(e) {
     removeRed()
     buttonRock.classList.add('selected')
@@ -120,23 +136,9 @@ function rockClick(e) {
     const compSelect = getComputerChoise();
     console.log('rock')
     playRound(playerInput, compSelect)
-    //set player score
-    console.log(playerScore)
-    scoreP.textContent = `Score: ${playerScore}`
-    //set comp score
-    console.log(compScore)
-    scoreC.textContent = `Score: ${compScore}`
-    if (playerScore >= 5) {
-        console.log('You win the game')
-        
-
-    } else if (compScore >= 5) {
-        console.log('Computer wins')
-      
-    }
+    game()
 }
-
-
+//function for paper button
 function paperClick(e) {
     removeRed()
     buttonPaper.classList.add('selected')
@@ -144,17 +146,9 @@ function paperClick(e) {
     const compSelect = getComputerChoise();
     console.log('paper')
     playRound(playerInput, compSelect)
-    console.log(playerScore)
-    scoreP.textContent = `Score: ${playerScore}`
-    console.log(compScore)
-    scoreC.textContent = `Score: ${compScore}`
-    if (playerScore >= 5) {
-        console.log('You win the game')
-    } else if (compScore >= 5) {
-        console.log('Computer wins')
-    }
+    game()
 }
-
+//function for scissors button
 function scisClick(e) {
     removeRed()
     buttonScis.classList.add('selected')
@@ -162,63 +156,5 @@ function scisClick(e) {
     const compSelect = getComputerChoise();
     console.log('scisors')
     playRound(playerInput, compSelect)
-    console.log(playerScore)
-    scoreP.textContent = `Score: ${playerScore}`
-    console.log(compScore)
-    scoreC.textContent = `Score: ${compScore}`
-    if (playerScore >= 5) {
-        console.log('You win the game')
-
-    } else if (compScore >= 5) {
-        console.log('Computer wins')
-    }
+    game()
 }
-
-
-
-// function game() {
-//     console.log("First to 5 wins!")
-//     for (let i = 1; i < 50; i++) {
-
-//         if (compScore >= 5) {
-//             console.log(`Computer wins at round ${i} with a score of ${compScore} to ${playerScore}!`)
-//             return
-//         } else if (playerScore >= 5) {
-//             console.log(`Player wrins at round ${i} with a score of ${playerScore} to ${compScore}!`)
-//             return
-//         }
-
-//         console.log(`This is round ${i}!`)
-
-//         const compSelect = getComputerChoise();
-//         //console.log(`computer selection is ${compSelect}`);
-
-//         const playerInput = getPlayerInput()
-//         console.clear();
-//         //console.log(`player selection is ${playerInput}`);
-
-//         //end loop if player enters null or empty srtring
-//         if (playerInput === null || playerInput === "") {
-//             console.log(`Player gave up at round ${i} with a score of ${playerScore} to ${compScore}!`)
-//             return
-//         }
-
-//         playRound(playerInput, compSelect);
-
-//         //convert letters to words
-//         playerWord = convertToWord(playerInput)
-//         compWord = convertToWord(compSelect)
-//         console.log(`Player chose ${playerWord}`)
-//         console.log(`Computer chose ${compWord}`)
-
-//         console.log(`The current score is ${compScore} for the computer, and ${playerScore} for the player!`)
-
-
-//     }
-// }
-
-
-
-
-
-//game();
