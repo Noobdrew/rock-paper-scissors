@@ -2,28 +2,32 @@
     border: 1px solid red;
 } */
 body {
+    font-family: Helvetica, sans-serif;
+    color: #c0c7e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: #161925;
     text-shadow: #0e1018 5px 5px 2px;
+
 }
 
 .container {
-    font-family: Helvetica, sans-serif;
-    width: 100%;
-    height: 50%;
+    margin-top: 10%;
     padding: 10px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #c0c7e0;
-    
-
+    filter: blur(0px);
+    transition: 0.5s -webkit-filter linear
 }
 
 .inputConteiner {
 
-    width: 100%;
+
     display: flex;
     padding: 15px;
     text-align: center;
@@ -38,7 +42,7 @@ body {
     margin: 20px;
     padding: 10px;
     width: 350px;
-    height: 300px;
+    height: 350px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -46,16 +50,18 @@ body {
     border: 1px #0e1018 solid;
     box-shadow: #0e1018 5px 5px;
 }
-.card h3{
+
+.card h3 {
     font-size: 30px;
     text-shadow: #0e1018 5px 5px 4px;
 }
+
 .inputs {
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    
+
 }
 
 .inputs div {
@@ -68,7 +74,8 @@ body {
 }
 
 .button {
-    width: 70px;
+    width: 95px;
+    height: 120px;
     color: black;
     font-size: larger;
     font-weight: bold;
@@ -77,14 +84,77 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 0px;
     background-color: #8EA8C3;
     box-shadow: #161925 5px 5px;
     text-shadow: #23395B 1px 1px 3px;
 }
- 
 
+button:hover {
+    background-color: #748ba3;
+}
+
+button:active {
+    background-color: #27323d;
+    transform: translate(5px, 3px);
+    box-shadow: #161925 2px 2px;
+}
+
+.computer .button {
+    width: 93px;
+    height: 118px;
+    box-shadow: #161925 2px 2px;
+}
+
+.selected {
+    background-color: #27323d;
+}
+
+.selected:hover {
+    background-color: #27323d;
+}
 
 .button p {
     margin: 0;
+}
+
+.popup {
+    padding: 15px;
+    text-align: center;
+    font-size: 30px;
+    transform: translate(0, 0px);
+
+    position: absolute;
+    background-color: #23395B;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 180px;
+    border: black 2px solid;
+    border-radius: 50px;
+    box-shadow: #161925 5px 5px;
+    font-weight: bold;
+    transition: scale 1s;
+    transform: scale(0.01, 0.01);
+    visibility: hidden;
+}
+
+.popButton {
+    margin-top: 0px;
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    box-shadow: #161925 5px 5px;
+    font-size: 25px;
+}
+
+.popup h4 {
+    margin: 0;
+}
+
+.popup h6 {
+    margin-top: 25px;
+    margin-bottom: 5px;
 }
